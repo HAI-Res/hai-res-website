@@ -470,6 +470,16 @@ def render_content_page(entry: Entry, body_html: str, footer: str) -> str:
 
     if content_type == "profile":
         thumb = html.escape(entry.meta.get("thumbnail", "./assets/photo.svg"))
+        website = entry.meta.get("website", "").strip()
+        website_html = ""
+        if website:
+            href = website if "://" in website else f"https://{website}"
+            label = re.sub(r"^https?://", "", website).rstrip("/")
+            website_html = (
+                f'\n        <p class="profile-website">'
+                f'<a href="{html.escape(href)}" target="_blank" rel="noopener">'
+                f"{html.escape(label)}</a></p>"
+            )
         hero = f"""    <a class="profile-back" href="../../people.html">← People</a>
 
     <div class="hero-bio">
@@ -478,7 +488,7 @@ def render_content_page(entry: Entry, body_html: str, footer: str) -> str:
       </div>
       <div class="profile-hero">
         <h1>{html.escape(title)}</h1>
-        <p class="profile-tagline">{html.escape(subtitle)}</p>
+        <p class="profile-tagline">{html.escape(subtitle)}</p>{website_html}
       </div>
     </div>"""
         main_html = (

@@ -470,6 +470,25 @@ article .ratio iframe {
   margin: 0 0 2rem;
 }
 
+.profile-tagline:has(+ .profile-website) {
+  margin-bottom: 0.4rem;
+}
+
+.profile-website {
+  font-size: 0.9rem;
+  margin: 0 0 2rem;
+}
+
+.profile-website a {
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+
+.profile-website a:hover {
+  color: var(--text);
+}
+
 .profile-section {
   margin-bottom: 2rem;
 }
@@ -671,6 +690,17 @@ article .ratio iframe {
 
 .lab-intro a {
   color: var(--accent);
+}
+
+.lab-photo {
+  margin: 1.75rem 0 0;
+}
+
+.lab-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
 .blog-carousel {
