@@ -7,3 +7,7 @@ blog_posts/_reference_lmdm-public/
 *.mov
 
 blog_posts/agents_in_concert/assets/videos/rachel.mov
+
+# >>> generated from index.md (managed by scripts/build_listings.py)
+profiles/nithya_shikarpur/index.html
+# <<< generated from index.md
