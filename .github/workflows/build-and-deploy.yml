@@ -1,4 +1,4 @@
-name: Build listings
+name: Build and deploy
 
 on:
   push:
@@ -8,6 +8,12 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -20,11 +26,14 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install dependencies
+        run: python3 -m pip install -r requirements.txt
+
       - name: Validate metadata on PR
         if: github.event_name == 'pull_request'
         run: python3 scripts/build_listings.py
 
-      - name: Build and commit listing pages
+      - name: Build listings and Markdown content
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: python3 scripts/build_listings.py
 
@@ -33,6 +42,26 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add people.html blog.html music.html data/blog.json index.html about.html join.html publications.html templates/snippets/
+          git add people.html blog.html music.html data/blog.json index.html about.html join.html publications.html templates/snippets/ .gitignore
           git diff --staged --quiet || git commit -m "chore: regenerate listing pages"
           git push
+
+      - name: Upload Pages artifact
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Uploads the working tree, including Markdown-generated index.html
+          # files that are gitignored and therefore never committed.
+          path: .
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -7,6 +7,12 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   sync:
@@ -20,7 +26,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install scholarly
+        run: python3 -m pip install -r requirements.txt
 
       - name: Sync publications
         env:
@@ -38,6 +44,9 @@ jobs:
           fi
           python3 scripts/sync_scholar.py
 
+      - name: Rebuild listings and Markdown content
+        run: python3 scripts/build_listings.py
+
       - name: Commit publications
         run: |
           git config user.name "github-actions[bot]"
@@ -45,3 +54,19 @@ jobs:
           git add data/publications.json publications.html
           git diff --staged --quiet || git commit -m "chore: sync publications from Google Scholar"
           git push
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: sync
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
