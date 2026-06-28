@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-05-31T10:13:34.004331+00:00",
+  "updated_at": "2026-06-28T10:26:03.490119+00:00",
   "source": "google_scholar",
   "publications": [
     {
@@ -7,7 +7,7 @@
       "authors": "Cheng-Zhi Anna Huang and Ashish Vaswani and Jakob Uszkoreit and Ian Simon and Curtis Hawthorne and Noam Shazeer and Andrew M Dai and Matthew D Hoffman and Monica Dinculescu and Douglas Eck",
       "venue": "ICLR 2019",
       "year": "2018",
-      "citations": 1571,
+      "citations": 1594,
       "scholar_url": "https://arxiv.org/abs/1809.04281",
       "scholar_id": "NRz_EVgAAAAJ:vV6vV6tmYwMC",
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:vV6vV6tmYwMC"
@@ -17,7 +17,7 @@
       "authors": "Curtis Hawthorne and Andriy Stasyuk and Adam Roberts and Ian Simon and Cheng-Zhi Anna Huang and Sander Dieleman and Erich Elsen and Jesse Engel and Douglas Eck",
       "venue": "ICLR 2019",
       "year": "2018",
-      "citations": 814,
+      "citations": 830,
       "scholar_url": "https://arxiv.org/abs/1810.12247",
       "scholar_id": "NRz_EVgAAAAJ:2P1L_qKh6hAC",
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:2P1L_qKh6hAC"
@@ -27,7 +27,7 @@
       "authors": "Ryan Louie and Andy Coenen and Cheng-Zhi Anna Huang and Michael Terry and Carrie J Cai",
       "venue": "CHI 2020",
       "year": "2020",
-      "citations": 467,
+      "citations": 471,
       "scholar_url": "",
       "scholar_id": "NRz_EVgAAAAJ:4OULZ7Gr8RgC",
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:4OULZ7Gr8RgC"
@@ -47,7 +47,7 @@
       "authors": "Cheng-Zhi Anna Huang and Hendrik Vincent Koops and Ed Newton-Rex and Monica Dinculescu and Carrie J Cai",
       "venue": "",
       "year": "2020",
-      "citations": 179,
+      "citations": 180,
       "scholar_url": "https://arxiv.org/abs/2010.05388",
       "scholar_id": "NRz_EVgAAAAJ:yD5IFk8b50cC",
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:yD5IFk8b50cC"
@@ -63,6 +63,16 @@
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:u_35RYKgDlwC"
     },
     {
+      "title": "MIDI-DDSP: Detailed Control of Musical Performance via Hierarchical Modeling",
+      "authors": "Yusong Wu and Ethan Manilow and Yi Deng and Rigel Swavely and Kyle Kastner and Tim Cooijmans and Aaron Courville and Cheng-Zhi Anna Huang and Jesse Engel",
+      "venue": "",
+      "year": "2022",
+      "citations": 105,
+      "scholar_url": "https://arxiv.org/abs/2112.09312",
+      "scholar_id": "NRz_EVgAAAAJ:SP6oXDckpogC",
+      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:SP6oXDckpogC"
+    },
+    {
       "title": "Chordripple: Recommending chords to help novice composers go beyond the ordinary",
       "authors": "Cheng-Zhi Anna Huang and David Duvenaud and Krzysztof Z Gajos",
       "venue": "ACM",
@@ -73,21 +83,11 @@
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:GnPB-g6toBAC"
     },
     {
-      "title": "MIDI-DDSP: Detailed Control of Musical Performance via Hierarchical Modeling",
-      "authors": "Yusong Wu and Ethan Manilow and Yi Deng and Rigel Swavely and Kyle Kastner and Tim Cooijmans and Aaron Courville and Cheng-Zhi Anna Huang and Jesse Engel",
-      "venue": "",
-      "year": "2022",
-      "citations": 103,
-      "scholar_url": "https://arxiv.org/abs/2112.09312",
-      "scholar_id": "NRz_EVgAAAAJ:SP6oXDckpogC",
-      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:SP6oXDckpogC"
-    },
-    {
       "title": "Expressive Communication: A Common Framework for Evaluating Developments in Generative Models and Steering Interfaces",
       "authors": "Ryan Louie and Jesse Engel and Cheng-Zhi Anna Huang",
       "venue": "",
       "year": "2022",
-      "citations": 69,
+      "citations": 70,
       "scholar_url": "https://arxiv.org/abs/2111.14951",
       "scholar_id": "NRz_EVgAAAAJ:dshw04ExmUIC",
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:dshw04ExmUIC"
@@ -113,6 +113,26 @@
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:ldfaerwXgEUC"
     },
     {
+      "title": "Flam: Frame-wise Language-Audio Modeling",
+      "authors": "Yusong Wu and Christos Tsirigotis and Ke Chen and Cheng-Zhi Anna Huang and Aaron Courville and Oriol Nieto and Prem Seetharaman and Justin Salamon",
+      "venue": "ICML 2025",
+      "year": "2025",
+      "citations": 19,
+      "scholar_url": "https://arxiv.org/abs/2505.05335",
+      "scholar_id": "NRz_EVgAAAAJ:t6usbXjVLHcC",
+      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:t6usbXjVLHcC"
+    },
+    {
+      "title": "Palestrina Pal: a grammar checker for music compositions in the style of Palestrina",
+      "authors": "Cheng Zhi Anna Huang and Elaine Chew",
+      "venue": "Conference on Understanding and Creating Music",
+      "year": "2005",
+      "citations": 19,
+      "scholar_url": "https://www.researchgate.net/profile/Elaine-Chew-3/publication/228788093_Palestrina_Pal_a_grammar_checker_for_music_compositions_in_the_style_of_Palestrina/links/02e7e51dac826a3c00000000/Palestrina-Pal-a-grammar-checker-for-music-compositions-in-the-style-of-Palestrina.pdf",
+      "scholar_id": "NRz_EVgAAAAJ:ns9cj8rnVeAC",
+      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:ns9cj8rnVeAC"
+    },
+    {
       "title": "Improving Source Separation by Explicitly Modeling Dependencies Between Sources",
       "authors": "Ethan Manilow and Curtis Hawthorne and Cheng-Zhi Anna Huang and Bryan Pardo and Jesse Engel",
       "venue": "ICASSP 2022",
@@ -121,16 +141,6 @@
       "scholar_url": "https://ieeexplore.ieee.org/abstract/document/9747076/",
       "scholar_id": "NRz_EVgAAAAJ:uWQEDVKXjbEC",
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:uWQEDVKXjbEC"
-    },
-    {
-      "title": "Palestrina Pal: a grammar checker for music compositions in the style of Palestrina",
-      "authors": "Cheng Zhi Anna Huang and Elaine Chew",
-      "venue": "Conference on Understanding and Creating Music",
-      "year": "2005",
-      "citations": 18,
-      "scholar_url": "https://www.researchgate.net/profile/Elaine-Chew-3/publication/228788093_Palestrina_Pal_a_grammar_checker_for_music_compositions_in_the_style_of_Palestrina/links/02e7e51dac826a3c00000000/Palestrina-Pal-a-grammar-checker-for-music-compositions-in-the-style-of-Palestrina.pdf",
-      "scholar_id": "NRz_EVgAAAAJ:ns9cj8rnVeAC",
-      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:ns9cj8rnVeAC"
     },
     {
       "title": "Visualizing Music Transformer",
@@ -143,21 +153,11 @@
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:RGFaLdJalmkC"
     },
     {
-      "title": "Flam: Frame-wise Language-Audio Modeling",
-      "authors": "Yusong Wu and Christos Tsirigotis and Ke Chen and Cheng-Zhi Anna Huang and Aaron Courville and Oriol Nieto and Prem Seetharaman and Justin Salamon",
-      "venue": "ICML 2025",
-      "year": "2025",
-      "citations": 15,
-      "scholar_url": "https://arxiv.org/abs/2505.05335",
-      "scholar_id": "NRz_EVgAAAAJ:t6usbXjVLHcC",
-      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:t6usbXjVLHcC"
-    },
-    {
       "title": "Adaptive Accompaniment with ReaLchords",
       "authors": "Yusong Wu and Tim Cooijmans and Kyle Kastner and Adam Roberts and Ian Simon and Alexander Scarlatos and Chris Donahue and Cassie Tarakajian and Shayegan Omidshafiei and Aaron Courville and Pablo Samuel Castro and Natasha Jaques and Cheng-Zhi Anna Huang",
       "venue": "ICML 2024",
       "year": "2024",
-      "citations": 15,
+      "citations": 16,
       "scholar_url": "https://arxiv.org/abs/2506.14723",
       "scholar_id": "NRz_EVgAAAAJ:sSrBHYA8nusC",
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:sSrBHYA8nusC"
@@ -173,6 +173,16 @@
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:rO6llkc54NcC"
     },
     {
+      "title": "Live Music Models",
+      "authors": "Lyria Team and Antoine Caillon and Brian McWilliams and Cassie Tarakajian and Ian Simon and Ilaria Manco and Jesse Engel and Noah Constant and Yunpeng Li and Timo I Denk and Alberto Lalama and Andrea Agostinelli and Cheng-Zhi Anna Huang and Ethan Manilow and George Brower and Hakan Erdogan and Heidi Lei and Itai Rolnick and Ivan Grishchenko and Manu Orsini and Matej Kastelic and Mauricio Zuluaga and Mauro Verzetti and Michael Dooley and Ondrej Skopek and Rafael Ferrer and Savvas Petridis and Zalán Borsos and Äaron van den Oord and Douglas Eck and Eli Collins and Jason Baldridge and Tom Hume and Chris Donahue and Kehang Han and Adam Roberts",
+      "venue": "NeurIPS Creative AI Track 2025",
+      "year": "2025",
+      "citations": 14,
+      "scholar_url": "https://arxiv.org/abs/2508.04651",
+      "scholar_id": "NRz_EVgAAAAJ:XiVPGOgt02cC",
+      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:XiVPGOgt02cC"
+    },
+    {
       "title": "Towards Mixed-Initiative Generation of Multi-Channel Sequential Structure",
       "authors": "Cheng-Zhi Anna Huang and Sherol Chen and Mark Nelson and Douglas Eck",
       "venue": "ICLR 2018 Workshop",
@@ -183,21 +193,11 @@
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:ZHo1McVdvXMC"
     },
     {
-      "title": "Live Music Models",
-      "authors": "Lyria Team and Antoine Caillon and Brian McWilliams and Cassie Tarakajian and Ian Simon and Ilaria Manco and Jesse Engel and Noah Constant and Yunpeng Li and Timo I Denk and Alberto Lalama and Andrea Agostinelli and Cheng-Zhi Anna Huang and Ethan Manilow and George Brower and Hakan Erdogan and Heidi Lei and Itai Rolnick and Ivan Grishchenko and Manu Orsini and Matej Kastelic and Mauricio Zuluaga and Mauro Verzetti and Michael Dooley and Ondrej Skopek and Rafael Ferrer and Savvas Petridis and Zalán Borsos and Äaron van den Oord and Douglas Eck and Eli Collins and Jason Baldridge and Tom Hume and Chris Donahue and Kehang Han and Adam Roberts",
-      "venue": "NeurIPS Creative AI Track 2025",
-      "year": "2025",
-      "citations": 10,
-      "scholar_url": "https://arxiv.org/abs/2508.04651",
-      "scholar_id": "NRz_EVgAAAAJ:XiVPGOgt02cC",
-      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:XiVPGOgt02cC"
-    },
-    {
       "title": "Compositional Steering of Music Transformers",
       "authors": "Halley Young and Vincent Dumoulin and Pablo S Castro and Jesse Engel and Cheng-Zhi Anna Huang",
       "venue": "Human-AI Co-Creation with Generative Models (HAI-GEN) Workshop",
       "year": "2021",
-      "citations": 8,
+      "citations": 9,
       "scholar_url": "https://ceur-ws.org/Vol-3124/paper7.pdf",
       "scholar_id": "NRz_EVgAAAAJ:p2g8aNsByqUC",
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:p2g8aNsByqUC"
@@ -207,7 +207,7 @@
       "authors": "Alexander Scarlatos and Yusong Wu and Ian Simon and Adam Roberts and Tim Cooijmans and Natasha Jaques and Cassie Tarakajian and Cheng-Zhi Anna Huang",
       "venue": "CHI Late Breaking 2025",
       "year": "2025",
-      "citations": 6,
+      "citations": 8,
       "scholar_url": "https://dl.acm.org/doi/abs/10.1145/3706599.3720227",
       "scholar_id": "NRz_EVgAAAAJ:5Ul4iDaHHb8C",
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:5Ul4iDaHHb8C"
@@ -217,20 +217,40 @@
       "authors": "Lancelot Blanchard and Perry Naseck and Stephen Brade and Kimaya Lecamwasam and Jordan Rudess and Cheng-Zhi Anna Huang and Joseph Paradiso",
       "venue": "",
       "year": "2025",
-      "citations": 5,
+      "citations": 6,
       "scholar_url": "https://ismir2025program.ismir.net/poster_321.html",
       "scholar_id": "NRz_EVgAAAAJ:Mojj43d5GZwC",
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:Mojj43d5GZwC"
+    },
+    {
+      "title": "Live Music Models",
+      "authors": "Antoine Caillon and Brian McWilliams and Cassie Tarakajian and Ian Simon and Ilaria Manco and Jesse Engel and Noah Constant and Yunpeng Li and Timo I Denk and Alberto Lalama and Andrea Agostinelli and Cheng-Zhi Anna Huang and Ethan Manilow and George Brower and Hakan Erdogan and Heidi Lei and Itai Rolnick and Ivan Grishchenko and Manu Orsini and Matej Kastelic and Mauricio Zuluaga and Mauro Verzetti and Michael Dooley and Ondrej Skopek and Rafael Ferrer and Zalán Borsos and Aaron van den Oord and Douglas Eck and Eli Collins and Jason Michael Baldridge and Tom Hume and Chris Donahue and Kehang Han and Adam Roberts",
+      "venue": "",
+      "year": "2025",
+      "citations": 6,
+      "scholar_url": "https://openreview.net/forum?id=SB3XbPgvpl",
+      "scholar_id": "NRz_EVgAAAAJ:WqliGbK-hY8C",
+      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:WqliGbK-hY8C"
     },
     {
       "title": "Hierarchical Generative Modeling of the Melodic Voice in Hindustani Classical Music",
       "authors": "Nithya Shikarpur and Krishna-Maneesha Dendukuri and Yusong Wu and Antoine Caillon and Cheng-Zhi Anna Huang",
       "venue": "ISMIR 2024",
       "year": "2024",
-      "citations": 5,
+      "citations": 6,
       "scholar_url": "",
       "scholar_id": "NRz_EVgAAAAJ:geHnlv5EZngC",
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:geHnlv5EZngC"
+    },
+    {
+      "title": "Streaming Generation for Music Accompaniment",
+      "authors": "Yusong Wu and Mason Wang and Heidi Lei and Stephen Brade and Lancelot Blanchard and Shih-Lun Wu and Aaron Courville and Anna Huang",
+      "venue": "arXiv preprint arXiv:2510.22105",
+      "year": "2025",
+      "citations": 5,
+      "scholar_url": "https://arxiv.org/abs/2510.22105",
+      "scholar_id": "NRz_EVgAAAAJ:olpn-zPbct0C",
+      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:olpn-zPbct0C"
     },
     {
       "title": "Editorial for TISMIR Special Collection: AI and Musical Creativity",
@@ -253,24 +273,14 @@
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:dTyEYWd-f8wC"
     },
     {
-      "title": "Streaming Generation for Music Accompaniment",
-      "authors": "Yusong Wu and Mason Wang and Heidi Lei and Stephen Brade and Lancelot Blanchard and Shih-Lun Wu and Aaron Courville and Anna Huang",
-      "venue": "arXiv preprint arXiv:2510.22105",
-      "year": "2025",
-      "citations": 3,
-      "scholar_url": "https://arxiv.org/abs/2510.22105",
-      "scholar_id": "NRz_EVgAAAAJ:olpn-zPbct0C",
-      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:olpn-zPbct0C"
-    },
-    {
-      "title": "Live Music Models",
-      "authors": "Antoine Caillon and Brian McWilliams and Cassie Tarakajian and Ian Simon and Ilaria Manco and Jesse Engel and Noah Constant and Yunpeng Li and Timo I Denk and Alberto Lalama and Andrea Agostinelli and Cheng-Zhi Anna Huang and Ethan Manilow and George Brower and Hakan Erdogan and Heidi Lei and Itai Rolnick and Ivan Grishchenko and Manu Orsini and Matej Kastelic and Mauricio Zuluaga and Mauro Verzetti and Michael Dooley and Ondrej Skopek and Rafael Ferrer and Zalán Borsos and Aaron van den Oord and Douglas Eck and Eli Collins and Jason Michael Baldridge and Tom Hume and Chris Donahue and Kehang Han and Adam Roberts",
-      "venue": "",
-      "year": "2025",
-      "citations": 3,
-      "scholar_url": "https://openreview.net/forum?id=SB3XbPgvpl",
-      "scholar_id": "NRz_EVgAAAAJ:WqliGbK-hY8C",
-      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:WqliGbK-hY8C"
+      "title": "Generative Adversarial Post-Training Mitigates Reward Hacking in Live Human-AI Music Interaction",
+      "authors": "Y Wu and S Brade and T Ma and TJ Fowler and E Yang and B Banar and A Courville and N Jaques* and CZA Huang*",
+      "venue": "ICLR 2026",
+      "year": "2026",
+      "citations": 4,
+      "scholar_url": "https://arxiv.org/abs/2511.17879",
+      "scholar_id": "NRz_EVgAAAAJ:JoZmwDi-zQgC",
+      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:JoZmwDi-zQgC"
     },
     {
       "title": "Redefining relationships in music",
@@ -313,16 +323,6 @@
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:9vf0nzSNQJEC"
     },
     {
-      "title": "Generative Adversarial Post-Training Mitigates Reward Hacking in Live Human-AI Music Interaction",
-      "authors": "Y Wu and S Brade and T Ma and TJ Fowler and E Yang and B Banar and A Courville and N Jaques* and CZA Huang*",
-      "venue": "ICLR 2026",
-      "year": "2026",
-      "citations": 2,
-      "scholar_url": "https://arxiv.org/abs/2511.17879",
-      "scholar_id": "NRz_EVgAAAAJ:JoZmwDi-zQgC",
-      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:JoZmwDi-zQgC"
-    },
-    {
       "title": "MIDI-LLM: Adapting Large Language Models for Text-to-MIDI Music Generation",
       "authors": "Shih-Lun Wu and Yoon Kim and Cheng-Zhi Anna Huang",
       "venue": "arXiv preprint arXiv:2511.03942",
@@ -363,6 +363,26 @@
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:N5tVd3kTz84C"
     },
     {
+      "title": "Live Music Diffusion Models: Efficient Fine-Tuning and Post-Training of Interactive Diffusion Music Generators",
+      "authors": "Zachary Novack and Stephen Brade and Haven Kim and Hugo Flores García and Nithya Shikarpur and Chinmay Talegaonkar and Suwan Kim and Valerie K Chen and Julian McAuley and Taylor Berg-Kirkpatrick and Cheng-Zhi Anna Huang",
+      "venue": "arXiv preprint arXiv:2605.22717",
+      "year": "2026",
+      "citations": 1,
+      "scholar_url": "https://arxiv.org/abs/2605.22717",
+      "scholar_id": "NRz_EVgAAAAJ:kzcrU_BdoSEC",
+      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:kzcrU_BdoSEC"
+    },
+    {
+      "title": "Exploratory Study Of Human-AI Interaction For Hindustani Music",
+      "authors": "Nithya Shikarpur and Cheng-Zhi Anna Huang",
+      "venue": "NeurIPS Creative AI Track 2024",
+      "year": "2024",
+      "citations": 1,
+      "scholar_url": "https://arxiv.org/abs/2411.13846",
+      "scholar_id": "NRz_EVgAAAAJ:tkaPQYYpVKoC",
+      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:tkaPQYYpVKoC"
+    },
+    {
       "title": "Mathematics and Computation in Music 2009: John Clough Memorial Conference",
       "authors": "Jonathan Bragg and Cheng-Zhi Anna Huang",
       "venue": "The MIT Press",
@@ -373,9 +393,9 @@
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:f2IySw72cVMC"
     },
     {
-      "title": "Stemphonic: All-at-once Flexible Multi-stem Music Generation",
+      "title": "Stemphonic: All-At-Once Flexible Multi-Stem Music Generation",
       "authors": "Shih-Lun Wu and Ge Zhu and Juan-Pablo Caceres and Cheng-Zhi Anna Huang and Nicholas J Bryan",
-      "venue": "arXiv preprint arXiv:2602.09891",
+      "venue": "IEEE",
       "year": "2026",
       "citations": 0,
       "scholar_url": "https://ieeexplore.ieee.org/abstract/document/11464473/",
@@ -401,16 +421,6 @@
       "scholar_url": "https://ismir2025program.ismir.net/lbd_479.html",
       "scholar_id": "NRz_EVgAAAAJ:WA5NYHcadZ8C",
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:WA5NYHcadZ8C"
-    },
-    {
-      "title": "Exploratory Study Of Human-AI Interaction For Hindustani Music",
-      "authors": "Nithya Shikarpur and Cheng-Zhi Anna Huang",
-      "venue": "NeurIPS Creative AI Track 2024",
-      "year": "2024",
-      "citations": 0,
-      "scholar_url": "https://arxiv.org/abs/2411.13846",
-      "scholar_id": "NRz_EVgAAAAJ:tkaPQYYpVKoC",
-      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:tkaPQYYpVKoC"
     },
     {
       "title": "Interactive Web-Based Chinese Poem Composer",
