@@ -269,101 +269,66 @@ def sync_home_carousel(payload: list[dict]) -> None:
     print(f"Wrote {index_path.relative_to(ROOT)} carousel data")
 
 
-def render_site_footer(
-    prefix: str,
-    blogs: list[Entry],
-    profiles: list[Entry],
-    music: list[Entry],
-) -> str:
-    def href(path: str) -> str:
-        if path.startswith("./"):
-            return prefix + path[2:]
-        return path
-
-    def link_list(entries: list[Entry], label_key: str = "title") -> str:
-        if not entries:
-            return '<li class="site-footer__empty">Coming soon</li>'
-        items = []
-        for entry in sorted(entries, key=lambda e: e.meta[label_key].lower()):
-            items.append(
-                f'<li><a href="{html.escape(href(entry.url))}">'
-                f"{html.escape(entry.meta['title'])}</a></li>"
-            )
-        return "\n        ".join(items)
-
-    blog_entries = sorted(blogs, key=lambda e: e.meta["date"], reverse=True)
-    blog_links = link_list(blog_entries) if blog_entries else '<li class="site-footer__empty">Coming soon</li>'
-
-    return f"""<footer class="site-footer">
-  <div class="site-footer__inner">
-    <div class="site-footer__row site-footer__row--nav">
-      <div class="site-footer__col">
-        <h3>About Us</h3>
-        <ul>
-          <li><a href="{href('./about.html')}">About the lab</a></li>
-          <li><a href="{href('./join.html')}">Join</a></li>
-          <li><a href="{href('./publications.html')}">Publications</a></li>
-        </ul>
-      </div>
-      <div class="site-footer__col">
-        <h3>People</h3>
-        <ul>
-          <li><a href="{href('./people.html')}">All people</a></li>
-          {link_list(profiles)}
-        </ul>
-      </div>
-      <div class="site-footer__col">
-        <h3>Music</h3>
-        <ul>
-          <li class="site-footer__empty">Coming soon</li>
-        </ul>
-      </div>
-      <div class="site-footer__col">
-        <h3>Concerts</h3>
-        <ul>
-          <li class="site-footer__empty">Coming soon</li>
-        </ul>
-      </div>
-      <div class="site-footer__col">
-        <h3>Blog Posts</h3>
-        <ul>
-          <li><a href="{href('./blog.html')}">All posts</a></li>
-          {blog_links}
-        </ul>
-      </div>
-    </div>
-    <div class="site-footer__row site-footer__row--brand">
-      <p class="site-footer__wordmark">Human-AI<br>Resonance</p>
-    </div>
-    <div class="site-footer__row site-footer__row--meta">
-      <div class="site-footer__meta">
-        <p class="site-footer__mit">MIT</p>
-        <p class="site-footer__address">32 Vassar St<br>Cambridge, MA 02139</p>
-        <p class="site-footer__contact"><a href="mailto:huangcza@mit.edu">huangcza@mit.edu</a></p>
-      </div>
-      <a class="site-footer__cta" href="{href('./join.html')}">Join the lab →</a>
-    </div>
-  </div>
-</footer>"""
+NEWS_ENTRY_RE = re.compile(r"^## (\d{4}-\d{2}-\d{2})\s*$", re.MULTILINE)
 
 
-FOOTER_PATTERN = re.compile(r"<footer class=\"site-footer\">.*?</footer>", re.DOTALL)
+def parse_news_md(text: str) -> list[dict]:
+    parts = NEWS_ENTRY_RE.split(text)
+    items: list[dict] = []
+    index = 1
+    while index + 1 < len(parts):
+        date = parts[index].strip()
+        body = parts[index + 1].strip()
+        if body:
+            items.append({"date": date, "html": render_markdown(body)})
+        index += 2
+    items.sort(key=lambda item: item["date"], reverse=True)
+    return items
 
 
-def sync_footers(footer_root: str, footer_nested: str) -> None:
-    root_pages = [
+def export_news() -> list[dict]:
+    news_md = ROOT / "data" / "news.md"
+    out_path = ROOT / "data" / "news.json"
+    if not news_md.is_file():
+        if out_path.is_file():
+            out_path.unlink()
+        return []
+    items = parse_news_md(news_md.read_text(encoding="utf-8"))
+    out_path.write_text(json.dumps(items, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"Wrote {out_path.relative_to(ROOT)} ({len(items)} item(s))")
+    return items
+
+
+def sync_home_news(items: list[dict]) -> None:
+    index_path = ROOT / "index.html"
+    text = index_path.read_text(encoding="utf-8")
+    json_str = json.dumps(items, ensure_ascii=False)
+    replacement = f'<script type="application/json" id="home-news-data">{json_str}</script>'
+    pattern = r'<script type="application/json" id="home-news-data">.*?</script>'
+    if re.search(pattern, text, re.DOTALL):
+        text = re.sub(pattern, replacement, text, count=1, flags=re.DOTALL)
+    else:
+        text = text.replace(
+            '  <script src="./assets/js/home-news.js"></script>',
+            f"  {replacement}\n  <script src=\"./assets/js/home-news.js\"></script>",
+        )
+    index_path.write_text(text, encoding="utf-8")
+    print(f"Wrote {index_path.relative_to(ROOT)} news data")
+
+
+FOOTER_PATTERN = re.compile(r"\n?  <footer class=\"site-footer\">.*?</footer>", re.DOTALL)
+
+
+def strip_footers() -> None:
+    paths: list[Path] = [
         ROOT / "index.html",
         ROOT / "about.html",
         ROOT / "join.html",
         ROOT / "publications.html",
+        ROOT / "people.html",
+        ROOT / "blog.html",
+        ROOT / "music.html",
     ]
-    for path in root_pages:
-        if not path.exists():
-            continue
-        text = FOOTER_PATTERN.sub(footer_root, path.read_text(encoding="utf-8"), count=1)
-        path.write_text(text, encoding="utf-8")
-        print(f"Wrote {path.relative_to(ROOT)} footer")
-
     for base in (ROOT / "profiles", ROOT / "music", ROOT / "blog_posts"):
         if not base.exists():
             continue
@@ -372,16 +337,17 @@ def sync_footers(footer_root: str, footer_nested: str) -> None:
                 continue
             index = child / "index.html"
             if index.exists():
-                text = FOOTER_PATTERN.sub(footer_nested, index.read_text(encoding="utf-8"), count=1)
-                index.write_text(text, encoding="utf-8")
+                paths.append(index)
 
-    snippets = ROOT / "templates" / "snippets"
-    snippets.mkdir(parents=True, exist_ok=True)
-    (snippets / "site_footer.html").write_text(footer_root + "\n", encoding="utf-8")
-    (snippets / "site_footer_nested.html").write_text(footer_nested + "\n", encoding="utf-8")
+    for path in paths:
+        text = path.read_text(encoding="utf-8")
+        updated = FOOTER_PATTERN.sub("", text, count=1)
+        if updated != text:
+            path.write_text(updated, encoding="utf-8")
+            print(f"Removed footer from {path.relative_to(ROOT)}")
 
 
-def page_shell(title: str, active: str, body: str, footer: str) -> str:
+def page_shell(title: str, active: str, body: str) -> str:
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -402,7 +368,6 @@ def page_shell(title: str, active: str, body: str, footer: str) -> str:
   <main id="main">
     {body}
   </main>
-  {footer}
   <script src="./assets/js/site.js"></script>
 </body>
 </html>
@@ -430,7 +395,6 @@ NESTED_HEADER = """  <header class="site-header">
 def nested_page_shell(
     title: str,
     main_html: str,
-    footer: str,
     extra_head: str = "",
     extra_body: str = "",
 ) -> str:
@@ -448,14 +412,13 @@ def nested_page_shell(
   <a class="skip-link" href="#main">Skip to content</a>
 {NESTED_HEADER}
 {main_html}
-  {footer}
   <script src="../../assets/js/site.js"></script>{body_extra}
 </body>
 </html>
 """
 
 
-def render_content_page(entry: Entry, body_html: str, footer: str) -> str:
+def render_content_page(entry: Entry, body_html: str) -> str:
     title = entry.meta["title"]
     subtitle = entry.meta.get("subtitle", "")
     content_type = entry.meta.get("type")
@@ -515,7 +478,7 @@ def render_content_page(entry: Entry, body_html: str, footer: str) -> str:
             "  </main>"
         )
 
-    return nested_page_shell(title, main_html, footer, extra_head, extra_body)
+    return nested_page_shell(title, main_html, extra_head, extra_body)
 
 
 GITIGNORE_START = "# >>> generated from index.md (managed by scripts/build_listings.py)"
@@ -543,13 +506,13 @@ def update_gitignore(generated: list[str]) -> None:
         print(f"Updated {path.relative_to(ROOT)} ({len(generated)} generated page(s))")
 
 
-def generate_markdown_pages(entries: list[Entry], footer_nested: str) -> None:
+def generate_markdown_pages(entries: list[Entry]) -> None:
     generated: list[str] = []
     for entry in entries:
         if entry.body_md is None:
             continue
         body_html = render_markdown(entry.body_md)
-        page = render_content_page(entry, body_html, footer_nested)
+        page = render_content_page(entry, body_html)
         out_path = ROOT / entry.folder / "index.html"
         out_path.write_text(page, encoding="utf-8")
         generated.append(f"{entry.folder}/index.html")
@@ -557,31 +520,74 @@ def generate_markdown_pages(entries: list[Entry], footer_nested: str) -> None:
     update_gitignore(generated)
 
 
-def render_people(entries: list[Entry], footer: str) -> str:
-    entries = sorted(entries, key=lambda e: e.meta["title"].lower())
-    cards = []
-    for entry in entries:
-        thumb_src = resolve_thumbnail(entry)
-        cards.append(
-            f"""<a class="person-card" href="{html.escape(entry.url)}">
+def render_person_card(entry: Entry) -> str:
+    thumb_src = resolve_thumbnail(entry)
+    return f"""<a class="person-card" href="{html.escape(entry.url)}">
   <div class="person-card__photo">
     <img src="{html.escape(thumb_src)}" alt="">
   </div>
   <h4>{html.escape(entry.meta['title'])}</h4>
   <h5>{html.escape(entry.meta['subtitle'])}</h5>
 </a>"""
+
+
+PEOPLE_GROUPS = (
+    ("current", "Current"),
+    ("alumni", "Alumni"),
+    ("friends", "Friends of HAI-RES"),
+)
+
+
+def profile_group(entry: Entry) -> str:
+    group = entry.meta.get("group", "current").lower().strip()
+    valid = {group_id for group_id, _ in PEOPLE_GROUPS}
+    return group if group in valid else "current"
+
+
+def render_people(entries: list[Entry]) -> str:
+    by_group: dict[str, list[Entry]] = {group_id: [] for group_id, _ in PEOPLE_GROUPS}
+    for entry in entries:
+        by_group[profile_group(entry)].append(entry)
+
+    pinned_slug = "anna_huang"
+    current = by_group["current"]
+    pinned = [e for e in current if e.slug == pinned_slug]
+    rest = sorted(
+        [e for e in current if e.slug != pinned_slug],
+        key=lambda e: e.meta["title"].lower(),
+    )
+    by_group["current"] = pinned + rest
+    for group_id in ("alumni", "friends"):
+        by_group[group_id] = sorted(
+            by_group[group_id],
+            key=lambda e: e.meta["title"].lower(),
         )
-    grid = "\n".join(cards) if cards else "<p>No profiles yet.</p>"
+
+    sections: list[str] = []
+    for group_id, group_title in PEOPLE_GROUPS:
+        group_entries = by_group[group_id]
+        if not group_entries:
+            continue
+        cards = "\n".join(render_person_card(entry) for entry in group_entries)
+        shuffle_attr = ' data-monthly-shuffle' if group_id == "current" else ""
+        sections.append(
+            f"""<section class="people-section" aria-labelledby="people-{group_id}">
+  <h2 id="people-{group_id}">{html.escape(group_title)}</h2>
+  <div class="card-grid"{shuffle_attr}>
+{cards}
+  </div>
+</section>"""
+        )
+
+    sections_html = "\n\n".join(sections) if sections else "<p>No profiles yet.</p>"
     body = f"""<p class="section-label">Community</p>
 <h1>People</h1>
 <p class="page-lede">Researchers, students, and collaborators in the Human-AI Resonance lab.</p>
-<div class="card-grid">
-{grid}
-</div>"""
-    return page_shell("People", "people", body, footer)
+{sections_html}"""
+    return page_shell("People", "people", body)
 
 
-def render_blog(entries: list[Entry], footer: str) -> str:
+def render_blog(entries: list[Entry]) -> str:
     entries = sorted(entries, key=lambda e: e.meta["date"], reverse=True)
     items = []
     for entry in entries:
@@ -608,14 +614,14 @@ def render_blog(entries: list[Entry], footer: str) -> str:
 <ul class="blog-list">
 {listing}
 </ul>"""
-    return page_shell("Blog", "blog", body, footer)
+    return page_shell("Blog", "blog", body)
 
 
-def render_music(entries: list[Entry], footer: str) -> str:
+def render_music(entries: list[Entry]) -> str:
     body = """<p class="section-label">Compositions</p>
 <h1>Music</h1>
 <p class="page-lede">Coming soon.</p>"""
-    return page_shell("Music", "music", body, footer)
+    return page_shell("Music", "music", body)
 
 
 def main() -> None:
@@ -625,24 +631,23 @@ def main() -> None:
 
     blog_payload = build_blog_payload(blogs)
     export_blog_json(blog_payload)
+    news_items = export_news()
+    sync_home_news(news_items)
     sync_home_carousel(blog_payload)
 
-    footer_root = render_site_footer("./", blogs, profiles, music)
-    footer_nested = render_site_footer("../../", blogs, profiles, music)
-
-    generate_markdown_pages(profiles + blogs + music, footer_nested)
-
-    sync_footers(footer_root, footer_nested)
+    generate_markdown_pages(profiles + blogs + music)
 
     outputs = {
-        ROOT / "people.html": render_people(profiles, footer_root),
-        ROOT / "blog.html": render_blog(blogs, footer_root),
-        ROOT / "music.html": render_music(music, footer_root),
+        ROOT / "people.html": render_people(profiles),
+        ROOT / "blog.html": render_blog(blogs),
+        ROOT / "music.html": render_music(music),
     }
 
     for path, content in outputs.items():
         path.write_text(content, encoding="utf-8")
         print(f"Wrote {path.relative_to(ROOT)}")
+
+    strip_footers()
 
 
 if __name__ == "__main__":

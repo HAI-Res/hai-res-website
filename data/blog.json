@@ -6,7 +6,7 @@
     "title": "Live Music Diffusion Models",
     "subtitle": "Interactive diffusion music generators",
     "excerpt": "Supplementary audio samples, live generative delay demos, and evaluation clips for LMDM.",
-    "thumbnail": "./blog_posts/live_music_diffusion_models/assets/cover.png?v=1781370580"
+    "thumbnail": "./blog_posts/live_music_diffusion_models/assets/cover.png?v=1781325016"
   },
   {
     "slug": "agents_in_concert",
@@ -15,6 +15,6 @@
     "title": "Agents in Concert",
     "subtitle": "Bringing AI to the stage with jazz musicians",
     "excerpt": "A condensed account of co-designing three AI performance systems for a public concert at MIT.",
-    "thumbnail": "./blog_posts/agents_in_concert/assets/thumbnail.png?v=1781370580"
+    "thumbnail": "./blog_posts/agents_in_concert/assets/thumbnail.png?v=1781325015"
   }
 ]

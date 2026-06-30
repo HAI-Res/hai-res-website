@@ -3,6 +3,7 @@ type: profile
 date: 2026-01-01
 title: Your Name
 subtitle: Role · short tagline
+group: current          # current | alumni | friends
 website: https://example.com   # optional — personal site, remove if unused
 thumbnail: ./assets/photo.svg
 ---

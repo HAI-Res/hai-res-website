@@ -12,6 +12,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 YEAR_RE = re.compile(r"\d{4}")
+FRONT_MATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n?", re.DOTALL)
+THUMB_META_RE = re.compile(
+    r'<meta\s+name="hai-res:thumbnail"\s+content=(["\'])(.*?)\1\s*/?>',
+    re.IGNORECASE | re.DOTALL,
+)
 CONFIG_PATH = ROOT / "data" / "scholar_config.json"
 PUBLICATIONS_PATH = ROOT / "data" / "publications.json"
 OVERRIDES_PATH = ROOT / "data" / "publications_overrides.json"
@@ -57,6 +62,33 @@ def scholar_citations_url(scholar_id: str) -> str:
     return f"https://scholar.google.com/scholar?oi=bibs&hl=en&cites={scholar_id}"
 
 
+ARXIV_ID_RE = re.compile(r"arxiv[:\s]*(\d{4}\.\d{4,5})", re.IGNORECASE)
+
+
+def paper_url_from_bib(bib: dict) -> str:
+    for key in ("url", "link", "ee", "eprint"):
+        value = str(bib.get(key, "")).strip()
+        if value.startswith("http"):
+            return value
+    haystack = " ".join(str(bib.get(field, "")) for field in ("journal", "citation", "venue"))
+    match = ARXIV_ID_RE.search(haystack)
+    if match:
+        return f"https://arxiv.org/abs/{match.group(1)}"
+    return ""
+
+
+def attach_paper_url(pub: dict, overrides: dict) -> dict:
+    if pub.get("scholar_url") or pub.get("paper_url"):
+        return pub
+    paper_map = overrides.get("paper", {})
+    scholar_id = pub.get("scholar_id", "")
+    title = pub.get("title", "")
+    paper_url = paper_map.get(scholar_id) or paper_map.get(title) or ""
+    if paper_url:
+        return {**pub, "scholar_url": paper_url}
+    return pub
+
+
 def fetch_scholar(user_id: str) -> list[dict] | None:
     try:
         from scholarly import scholarly  # type: ignore
@@ -78,6 +110,12 @@ def fetch_scholar(user_id: str) -> list[dict] | None:
                 or bib.get("publisher")
                 or ""
             )
+            scholar_url = (
+                filled.get("pub_url")
+                or filled.get("eprint_url")
+                or paper_url_from_bib(bib)
+                or ""
+            )
             publications.append(
                 {
                     "title": bib.get("title", "Untitled"),
@@ -85,7 +123,7 @@ def fetch_scholar(user_id: str) -> list[dict] | None:
                     "venue": venue,
                     "year": str(bib.get("pub_year", "")),
                     "citations": filled.get("num_citations", 0),
-                    "scholar_url": filled.get("pub_url") or filled.get("eprint_url") or "",
+                    "scholar_url": scholar_url,
                     "scholar_id": filled.get("author_pub_id", ""),
                     "citations_url": scholar_citations_url(filled.get("author_pub_id", "")),
                 }
@@ -127,78 +165,237 @@ def publication_year(pub: dict) -> int:
     return 0
 
 
+def is_valid_publication_year(year: int) -> bool:
+    if not year:
+        return True
+    current_year = datetime.now(timezone.utc).year
+    return 1970 <= year <= current_year + 1
+
+
+def thumbnail_from_spotlight(spotlight_url: str) -> str:
+    match = re.search(r"blog_posts/([^/]+)", spotlight_url)
+    if not match:
+        return ""
+    slug = match.group(1)
+    folder = ROOT / "blog_posts" / slug
+    thumb = ""
+    md_path = folder / "index.md"
+    html_path = folder / "index.html"
+    if md_path.is_file():
+        text = md_path.read_text(encoding="utf-8")
+        front_matter = FRONT_MATTER_RE.match(text)
+        if front_matter:
+            for line in front_matter.group(1).splitlines():
+                if line.strip().startswith("thumbnail:"):
+                    thumb = line.split(":", 1)[1].strip().strip("'\"")
+                    break
+    elif html_path.is_file():
+        meta_match = THUMB_META_RE.search(html_path.read_text(encoding="utf-8"))
+        if meta_match:
+            thumb = html.unescape(meta_match.group(2))
+    if not thumb:
+        return ""
+    rel = thumb.lstrip("./")
+    asset_path = folder / rel
+    url = f"./blog_posts/{slug}/{rel}"
+    if asset_path.is_file():
+        url = f"{url}?v={int(asset_path.stat().st_mtime)}"
+    return url
+
+
+def attach_thumbnail(pub: dict, overrides: dict) -> dict:
+    title = pub.get("title", "")
+    thumb_map = overrides.get("thumbnail", {})
+    if pub.get("thumbnail"):
+        return pub
+    if title in thumb_map:
+        return {**pub, "thumbnail": thumb_map[title]}
+    spotlight = pub.get("spotlight_url") or ""
+    if spotlight:
+        auto_thumb = thumbnail_from_spotlight(spotlight)
+        if auto_thumb:
+            return {**pub, "thumbnail": auto_thumb}
+    return pub
+
+
 def apply_overrides(publications: list[dict], overrides: dict) -> list[dict]:
     hide = set(overrides.get("hide", []))
     links = overrides.get("link", {})
     fix_venue = overrides.get("fix_venue", {})
+    featured = set(overrides.get("featured", []))
 
     filtered = []
     for pub in publications:
         pub_id = pub.get("scholar_id") or pub.get("title", "")
         if pub_id in hide or pub.get("title") in hide:
             continue
+        year = publication_year(pub)
+        if year and not is_valid_publication_year(year):
+            continue
         if pub.get("title") in fix_venue:
             pub = {**pub, "venue": fix_venue[pub["title"]]}
         if pub.get("title") in links:
             pub = {**pub, "spotlight_url": links[pub["title"]]}
-        filtered.append(pub)
+        if pub.get("title") in featured:
+            pub = {**pub, "featured": True}
+        pub = attach_paper_url(pub, overrides)
+        filtered.append(attach_thumbnail(pub, overrides))
 
     for extra in overrides.get("add", []):
-        filtered.append(extra)
+        if extra.get("title") in featured:
+            extra = {**extra, "featured": True}
+        extra = attach_paper_url(extra, overrides)
+        filtered.append(attach_thumbnail(extra, overrides))
 
     filtered.sort(key=lambda p: (-publication_year(p), p.get("title", "").lower()))
-    return filtered
+    return deduplicate_publications(filtered)
+
+
+def normalize_title(title: str) -> str:
+    return re.sub(r"\s+", " ", title.lower().strip())
+
+
+def publication_quality_score(pub: dict) -> tuple:
+    venue = pub.get("venue", "").strip()
+    url = primary_paper_url(pub)
+    return (
+        bool(venue),
+        pub.get("citations", 0),
+        "arxiv.org" in url,
+        bool(url),
+    )
+
+
+def deduplicate_publications(publications: list[dict]) -> list[dict]:
+    by_title: dict[str, dict] = {}
+    order: list[str] = []
+    for pub in publications:
+        key = normalize_title(pub.get("title", ""))
+        if not key:
+            order.append(f"__empty__{len(order)}")
+            by_title[order[-1]] = pub
+            continue
+        existing = by_title.get(key)
+        if existing is None:
+            by_title[key] = pub
+            order.append(key)
+        elif publication_quality_score(pub) > publication_quality_score(existing):
+            by_title[key] = pub
+    return [by_title[key] for key in order]
+
+
+def group_publications_by_year(publications: list[dict]) -> list[tuple[int, list[dict]]]:
+    groups: dict[int, list[dict]] = {}
+    for pub in publications:
+        year = publication_year(pub)
+        groups.setdefault(year, []).append(pub)
+    return sorted(groups.items(), key=lambda item: -item[0])
+
+
+def primary_paper_url(pub: dict) -> str:
+    return pub.get("paper_url") or pub.get("scholar_url") or pub.get("pdf_url") or ""
+
+
+def is_blog_url(url: str) -> bool:
+    return "blog_posts/" in url
+
+
+def render_pub_paper_links(pub: dict) -> str:
+    links: list[str] = []
+    paper_url = primary_paper_url(pub)
+    pdf_url = pub.get("pdf_url") or ""
+
+    if paper_url and paper_url != pdf_url:
+        links.append(
+            f'<a class="pub-card__link" href="{html.escape(paper_url)}">Paper</a>'
+        )
+
+    if pdf_url and pdf_url != paper_url:
+        links.append(f'<a class="pub-card__link" href="{html.escape(pdf_url)}">PDF</a>')
+
+    spotlight_url = pub.get("spotlight_url") or ""
+    if spotlight_url and is_blog_url(spotlight_url):
+        links.append(
+            f'<a class="pub-card__link" href="{html.escape(spotlight_url)}">Blog</a>'
+        )
+    elif spotlight_url:
+        links.append(
+            f'<a class="pub-card__link" href="{html.escape(spotlight_url)}">Project</a>'
+        )
+
+    if not links:
+        return ""
+    return f'<div class="pub-card__links">{" · ".join(links)}</div>'
+
+
+def render_pub_card(pub: dict) -> str:
+    title = pub.get("title", "")
+    title_text = html.escape(title)
+    paper_url = primary_paper_url(pub)
+    spotlight_url = pub.get("spotlight_url") or ""
+    title_href = paper_url or spotlight_url
+    if title_href:
+        title_html = f'<a href="{html.escape(title_href)}">{title_text}</a>'
+    else:
+        title_html = title_text
+
+    featured = pub.get("featured")
+    featured_html = '<span class="pub-card__featured" aria-hidden="true">★</span> ' if featured else ""
+
+    authors = html.escape(format_authors(pub.get("authors", "")))
+    authors_html = f'<p class="pub-card__authors">{authors}</p>' if authors else ""
+
+    venue = html.escape(pub.get("venue", ""))
+    venue_html = f'<p class="pub-card__venue"><em>{venue}</em></p>' if venue else ""
+
+    links_html = render_pub_paper_links(pub)
+
+    abstract = pub.get("abstract", "").strip()
+    abstract_html = ""
+    if abstract:
+        abstract_html = f"""<details class="pub-card__abstract">
+  <summary>Abstract</summary>
+  <p>{html.escape(abstract)}</p>
+</details>"""
+
+    return f"""    <li class="pub-card">
+      <article>
+        <h3 class="pub-card__title">{featured_html}{title_html}</h3>
+        {authors_html}
+        {venue_html}
+        {links_html}
+        {abstract_html}
+      </article>
+    </li>"""
 
 
 def render_publications(
     publications: list[dict],
     updated_at: str,
-    footer: str,
     scholar_user_id: str = "",
 ) -> str:
-    rows = []
-    for pub in publications:
-        title = pub.get("title", "")
-        title_html = html.escape(title)
-        if pub.get("scholar_url"):
-            title_html = f'<a href="{html.escape(pub["scholar_url"])}">{title_html}</a>'
-        elif pub.get("spotlight_url"):
-            title_html = f'<a href="{html.escape(pub["spotlight_url"])}">{title_html}</a>'
-
-        authors = html.escape(format_authors(pub.get("authors", "")))
-        venue = html.escape(pub.get("venue", ""))
-        venue_html = f'<div class="pub-table__venue">{venue}</div>' if venue else ""
-        if pub.get("spotlight_url") and pub.get("scholar_url"):
-            venue_html += f' <div class="pub-table__venue"><a href="{html.escape(pub["spotlight_url"])}">Project page</a></div>'
-
-        year = publication_year(pub)
-        year_label = str(year) if year else ""
-        citations = pub.get("citations", 0)
-        cite_url = pub.get("citations_url") or scholar_citations_url(pub.get("scholar_id", ""))
-        if cite_url and citations:
-            cited_html = f'<a href="{html.escape(cite_url)}">{citations}</a>'
-        elif citations:
-            cited_html = str(citations)
-        else:
-            cited_html = ""
-
-        rows.append(
-            f"""    <tr>
-      <td class="pub-table__title">
-        <div class="pub-table__paper">{title_html}</div>
-        <div class="pub-table__authors">{authors}</div>
-        {venue_html}
-      </td>
-      <td class="pub-table__cited">{cited_html}</td>
-      <td class="pub-table__year">{html.escape(year_label)}</td>
-    </tr>"""
+    year_sections = []
+    for year, pubs in group_publications_by_year(publications):
+        cards = "\n".join(render_pub_card(pub) for pub in pubs)
+        year_label = str(year) if year else "Undated"
+        year_id = f"pub-{year_label.lower()}"
+        year_sections.append(
+            f"""    <section class="pub-year" id="{html.escape(year_id)}" aria-labelledby="{html.escape(year_id)}-heading">
+      <h2 class="pub-year__heading" id="{html.escape(year_id)}-heading">{html.escape(year_label)}</h2>
+      <ol class="pub-list">
+{cards}
+      </ol>
+    </section>"""
         )
 
-    body_rows = "\n".join(rows)
+    body_sections = "\n\n".join(year_sections)
     scholar_link = ""
     if scholar_user_id:
         profile_url = f"https://scholar.google.com/citations?user={html.escape(scholar_user_id)}"
-        scholar_link = f'<p class="pub-scholar-link"><a href="{profile_url}">View full profile on Google Scholar</a></p>'
+        scholar_link = (
+            f'<p class="pub-scholar-link">'
+            f'<a href="{profile_url}">View full profile on Google Scholar</a></p>'
+        )
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -219,22 +416,13 @@ def render_publications(
   <main id="main">
     <p class="section-label">Research</p>
     <h1>Publications</h1>
+    <p class="page-lede">Selected papers from the Human-AI Resonance lab and collaborators.</p>
     {scholar_link}
-    <table class="pub-table">
-      <thead>
-        <tr>
-          <th scope="col">Title</th>
-          <th scope="col">Cited by</th>
-          <th scope="col">Year</th>
-        </tr>
-      </thead>
-      <tbody>
-{body_rows}
-      </tbody>
-    </table>
+    <div class="pub-index">
+{body_sections}
+    </div>
     <p class="pub-updated">Last updated: {html.escape(updated_at)}</p>
   </main>
-  {footer}
   <script src="./assets/js/site.js"></script>
 </body>
 </html>
@@ -274,15 +462,9 @@ def main() -> None:
     updated_at = payload.get("updated_at", datetime.now(timezone.utc).isoformat())
 
     sys.path.insert(0, str(ROOT / "scripts"))
-    from build_listings import render_site_footer, scan_directory
-
-    profiles = scan_directory(ROOT / "profiles", "profiles")
-    blogs = scan_directory(ROOT / "blog_posts", "blog_posts")
-    music = scan_directory(ROOT / "music", "music")
-    footer = render_site_footer("./", blogs, profiles, music)
 
     OUTPUT_PATH.write_text(
-        render_publications(publications, updated_at, footer, user_id),
+        render_publications(publications, updated_at, user_id),
         encoding="utf-8",
     )
     print(f"Wrote {OUTPUT_PATH.relative_to(ROOT)}")
