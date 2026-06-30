@@ -37,7 +37,7 @@
       "authors": "Cheng-Zhi Anna Huang and Tim Cooijmans and Adam Roberts and Aaron Courville and Douglas Eck",
       "venue": "ISMIR 2017",
       "year": "2016",
-      "citations": 249,
+      "citations": 248,
       "scholar_url": "https://arxiv.org/abs/1903.07227",
       "scholar_id": "NRz_EVgAAAAJ:RYcK_YlVTxYC",
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:RYcK_YlVTxYC"
@@ -47,6 +47,7 @@
       "authors": "Cheng-Zhi Anna Huang and Hendrik Vincent Koops and Ed Newton-Rex and Monica Dinculescu and Carrie J Cai",
       "venue": "",
       "year": "2020",
+      "citations": 180,
       "citations": 180,
       "scholar_url": "https://arxiv.org/abs/2010.05388",
       "scholar_id": "NRz_EVgAAAAJ:yD5IFk8b50cC",
@@ -183,6 +184,16 @@
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:rO6llkc54NcC"
     },
     {
+      "title": "Live Music Models",
+      "authors": "Lyria Team and Antoine Caillon and Brian McWilliams and Cassie Tarakajian and Ian Simon and Ilaria Manco and Jesse Engel and Noah Constant and Yunpeng Li and Timo I Denk and Alberto Lalama and Andrea Agostinelli and Cheng-Zhi Anna Huang and Ethan Manilow and George Brower and Hakan Erdogan and Heidi Lei and Itai Rolnick and Ivan Grishchenko and Manu Orsini and Matej Kastelic and Mauricio Zuluaga and Mauro Verzetti and Michael Dooley and Ondrej Skopek and Rafael Ferrer and Savvas Petridis and Zalán Borsos and Äaron van den Oord and Douglas Eck and Eli Collins and Jason Baldridge and Tom Hume and Chris Donahue and Kehang Han and Adam Roberts",
+      "venue": "NeurIPS Creative AI Track 2025",
+      "year": "2025",
+      "citations": 13,
+      "scholar_url": "https://arxiv.org/abs/2508.04651",
+      "scholar_id": "NRz_EVgAAAAJ:XiVPGOgt02cC",
+      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:XiVPGOgt02cC"
+    },
+    {
       "title": "Towards Mixed-Initiative Generation of Multi-Channel Sequential Structure",
       "authors": "Cheng-Zhi Anna Huang and Sherol Chen and Mark Nelson and Douglas Eck",
       "venue": "ICLR 2018 Workshop",
@@ -197,6 +208,7 @@
       "authors": "Halley Young and Vincent Dumoulin and Pablo S Castro and Jesse Engel and Cheng-Zhi Anna Huang",
       "venue": "Human-AI Co-Creation with Generative Models (HAI-GEN) Workshop",
       "year": "2021",
+      "citations": 9,
       "citations": 9,
       "scholar_url": "https://ceur-ws.org/Vol-3124/paper7.pdf",
       "scholar_id": "NRz_EVgAAAAJ:p2g8aNsByqUC",
@@ -283,6 +295,14 @@
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:dTyEYWd-f8wC"
     },
     {
+      "title": "Generative Adversarial Post-Training Mitigates Reward Hacking in Live Human-AI Music Interaction",
+      "authors": "Y Wu and S Brade and T Ma and TJ Fowler and E Yang and B Banar and A Courville and N Jaques* and CZA Huang*",
+      "venue": "ICLR 2026",
+      "year": "2026",
+      "citations": 4,
+      "scholar_url": "https://arxiv.org/abs/2511.17879",
+      "scholar_id": "NRz_EVgAAAAJ:JoZmwDi-zQgC",
+      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:JoZmwDi-zQgC"
       "title": "Generative Adversarial Post-Training Mitigates Reward Hacking in Live Human-AI Music Interaction",
       "authors": "Y Wu and S Brade and T Ma and TJ Fowler and E Yang and B Banar and A Courville and N Jaques* and CZA Huang*",
       "venue": "ICLR 2026",
@@ -394,7 +414,9 @@
     },
     {
       "title": "Stemphonic: All-At-Once Flexible Multi-Stem Music Generation",
+      "title": "Stemphonic: All-At-Once Flexible Multi-Stem Music Generation",
       "authors": "Shih-Lun Wu and Ge Zhu and Juan-Pablo Caceres and Cheng-Zhi Anna Huang and Nicholas J Bryan",
+      "venue": "IEEE",
       "venue": "IEEE",
       "year": "2026",
       "citations": 0,
