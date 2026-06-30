@@ -64,6 +64,16 @@
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:u_35RYKgDlwC"
     },
     {
+      "title": "MIDI-DDSP: Detailed Control of Musical Performance via Hierarchical Modeling",
+      "authors": "Yusong Wu and Ethan Manilow and Yi Deng and Rigel Swavely and Kyle Kastner and Tim Cooijmans and Aaron Courville and Cheng-Zhi Anna Huang and Jesse Engel",
+      "venue": "",
+      "year": "2022",
+      "citations": 105,
+      "scholar_url": "https://arxiv.org/abs/2112.09312",
+      "scholar_id": "NRz_EVgAAAAJ:SP6oXDckpogC",
+      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:SP6oXDckpogC"
+    },
+    {
       "title": "Chordripple: Recommending chords to help novice composers go beyond the ordinary",
       "authors": "Cheng-Zhi Anna Huang and David Duvenaud and Krzysztof Z Gajos",
       "venue": "ACM",
@@ -169,6 +179,7 @@
       "venue": "ICML 2024",
       "year": "2024",
       "citations": 16,
+      "citations": 16,
       "scholar_url": "https://arxiv.org/abs/2506.14723",
       "scholar_id": "NRz_EVgAAAAJ:sSrBHYA8nusC",
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:sSrBHYA8nusC"
@@ -230,9 +241,20 @@
       "venue": "CHI Late Breaking 2025",
       "year": "2025",
       "citations": 8,
+      "citations": 8,
       "scholar_url": "https://dl.acm.org/doi/abs/10.1145/3706599.3720227",
       "scholar_id": "NRz_EVgAAAAJ:5Ul4iDaHHb8C",
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:5Ul4iDaHHb8C"
+    },
+    {
+      "title": "Live Music Models",
+      "authors": "Antoine Caillon and Brian McWilliams and Cassie Tarakajian and Ian Simon and Ilaria Manco and Jesse Engel and Noah Constant and Yunpeng Li and Timo I Denk and Alberto Lalama and Andrea Agostinelli and Cheng-Zhi Anna Huang and Ethan Manilow and George Brower and Hakan Erdogan and Heidi Lei and Itai Rolnick and Ivan Grishchenko and Manu Orsini and Matej Kastelic and Mauricio Zuluaga and Mauro Verzetti and Michael Dooley and Ondrej Skopek and Rafael Ferrer and Zalán Borsos and Aaron van den Oord and Douglas Eck and Eli Collins and Jason Michael Baldridge and Tom Hume and Chris Donahue and Kehang Han and Adam Roberts",
+      "venue": "",
+      "year": "2025",
+      "citations": 6,
+      "scholar_url": "https://openreview.net/forum?id=SB3XbPgvpl",
+      "scholar_id": "NRz_EVgAAAAJ:WqliGbK-hY8C",
+      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:WqliGbK-hY8C"
     },
     {
       "title": "Live Music Models",
@@ -250,9 +272,20 @@
       "venue": "ISMIR 2024",
       "year": "2024",
       "citations": 6,
+      "citations": 6,
       "scholar_url": "",
       "scholar_id": "NRz_EVgAAAAJ:geHnlv5EZngC",
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:geHnlv5EZngC"
+    },
+    {
+      "title": "Streaming Generation for Music Accompaniment",
+      "authors": "Yusong Wu and Mason Wang and Heidi Lei and Stephen Brade and Lancelot Blanchard and Shih-Lun Wu and Aaron Courville and Anna Huang",
+      "venue": "arXiv preprint arXiv:2510.22105",
+      "year": "2025",
+      "citations": 5,
+      "scholar_url": "https://arxiv.org/abs/2510.22105",
+      "scholar_id": "NRz_EVgAAAAJ:olpn-zPbct0C",
+      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:olpn-zPbct0C"
     },
     {
       "title": "Streaming Generation for Music Accompaniment",
@@ -381,6 +414,26 @@
       "scholar_url": "https://scholar.google.com/scholar?cluster=2240867107817645093&hl=en&oi=scholarr",
       "scholar_id": "NRz_EVgAAAAJ:N5tVd3kTz84C",
       "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:N5tVd3kTz84C"
+    },
+    {
+      "title": "Live Music Diffusion Models: Efficient Fine-Tuning and Post-Training of Interactive Diffusion Music Generators",
+      "authors": "Zachary Novack and Stephen Brade and Haven Kim and Hugo Flores García and Nithya Shikarpur and Chinmay Talegaonkar and Suwan Kim and Valerie K Chen and Julian McAuley and Taylor Berg-Kirkpatrick and Cheng-Zhi Anna Huang",
+      "venue": "arXiv preprint arXiv:2605.22717",
+      "year": "2026",
+      "citations": 1,
+      "scholar_url": "https://arxiv.org/abs/2605.22717",
+      "scholar_id": "NRz_EVgAAAAJ:kzcrU_BdoSEC",
+      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:kzcrU_BdoSEC"
+    },
+    {
+      "title": "Exploratory Study Of Human-AI Interaction For Hindustani Music",
+      "authors": "Nithya Shikarpur and Cheng-Zhi Anna Huang",
+      "venue": "NeurIPS Creative AI Track 2024",
+      "year": "2024",
+      "citations": 1,
+      "scholar_url": "https://arxiv.org/abs/2411.13846",
+      "scholar_id": "NRz_EVgAAAAJ:tkaPQYYpVKoC",
+      "citations_url": "https://scholar.google.com/scholar?oi=bibs&hl=en&cites=NRz_EVgAAAAJ:tkaPQYYpVKoC"
     },
     {
       "title": "Live Music Diffusion Models: Efficient Fine-Tuning and Post-Training of Interactive Diffusion Music Generators",
