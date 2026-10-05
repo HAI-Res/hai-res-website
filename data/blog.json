@@ -1,12 +1,21 @@
 [
   {
+    "slug": "encypher",
+    "url": "./blog_posts/encypher/index.html",
+    "date": "2026-10-05",
+    "title": "Encypher",
+    "subtitle": "Translating collective movement into prompts for a real-time music model",
+    "excerpt": "Five weeks of co-design with local dancers, a user study with strangers, a museum event and a concert, and what each one changed about the system.",
+    "thumbnail": "./blog_posts/encypher/assets/thumbnail.jpg?v=1791217105"
+  },
+  {
     "slug": "live_music_diffusion_models",
     "url": "./blog_posts/live_music_diffusion_models/index.html",
     "date": "2026-05-01",
     "title": "Live Music Diffusion Models",
     "subtitle": "Interactive diffusion music generators",
     "excerpt": "Supplementary audio samples, live generative delay demos, and evaluation clips for LMDM.",
-    "thumbnail": "./blog_posts/live_music_diffusion_models/assets/cover.png?v=1789592738"
+    "thumbnail": "./blog_posts/live_music_diffusion_models/assets/cover.png?v=1791217067"
   },
   {
     "slug": "agents_in_concert",
@@ -15,6 +24,6 @@
     "title": "Agents in Concert",
     "subtitle": "Bringing AI to the stage with jazz musicians",
     "excerpt": "A condensed account of co-designing three AI performance systems for a public concert at MIT.",
-    "thumbnail": "./blog_posts/agents_in_concert/assets/thumbnail.png?v=1789592738"
+    "thumbnail": "./blog_posts/agents_in_concert/assets/thumbnail.png?v=1791217066"
   }
 ]
